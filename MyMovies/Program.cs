@@ -12,6 +12,7 @@ using MyMovies.Core.Entities;
 using MyMovies.Infrastructure.Persistence;
 using System.Text;
 using Npgsql;
+using MyMovies.Application.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpClient<IEmailSender, BrevoEmailSender>();
+builder.Services.AddScoped<IEmailVerificationService, EmailVerificationService>();
 
 // Password Hasher
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();

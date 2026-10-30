@@ -13,4 +13,7 @@ public interface IUserService
     Task ChangeEmailAsync(int id, ChangeEmailDto dto);
     Task ChangePasswordAsync(int id, ChangePasswordDto dto);
     Task ChangeRoleAsync(int id, UserRoleUpdateDto dto);
+    Task<string?> CheckRegistrationAvailabilityAsync(string username, string email);
+    Task<bool> EmailExistsAsync(string email);
+    Task<string> ResetPasswordAsync(string email, string newPassword);
 }

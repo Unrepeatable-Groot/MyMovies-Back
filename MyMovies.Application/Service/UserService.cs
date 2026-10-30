@@ -24,6 +24,17 @@ public class UserService : IUserService
     }
 
 
+    public async Task<string?> CheckRegistrationAvailabilityAsync(string username, string email)
+    {
+        if (await _userRepository.GetByEmailAsync(email) != null)
+            return $"Email '{email}' is already registered.";
+
+        if (await _userRepository.GetByUsernameAsync(username) != null)
+            return $"Username '{username}' is already taken.";
+
+        return null;
+    }
+
     public async Task<string> RegisterAsync(UserCreateDto dto)
     {
         var existingByEmail = await _userRepository.GetByEmailAsync(dto.Email);
@@ -60,6 +71,23 @@ public class UserService : IUserService
         var result = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
         if (result == PasswordVerificationResult.Failed)
             throw new Exception("Invalid credentials.");
+
+        return GenerateToken(user);
+    }
+
+
+    public async Task<bool> EmailExistsAsync(string email)
+    {
+        return await _userRepository.GetByEmailAsync(email) != null;
+    }
+
+    public async Task<string> ResetPasswordAsync(string email, string newPassword)
+    {
+        var user = await _userRepository.GetByEmailAsync(email)
+            ?? throw new Exception("User not found.");
+
+        user.Password = _passwordHasher.HashPassword(user, newPassword);
+        await _userRepository.UpdateAsync(user);
 
         return GenerateToken(user);
     }
