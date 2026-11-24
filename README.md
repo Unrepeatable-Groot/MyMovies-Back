@@ -36,8 +36,10 @@ You need the .NET 10 SDK, a database instance, and a Brevo API key if you want t
 
 New accounts start with the User role. To create the first Owner, change that user's role directly in the database. From then on, the Owner can promote other users through the API.
 
-##Links
+## Links
 
 GitHub Front: github.com/Unrepeatable-Groot/MyMovies-Front 
+
 Swagger: https://mymovies-u2vz.onrender.com/swagger 
+
 Site: https://mymoviesfront.netlify.app/
