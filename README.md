@@ -35,3 +35,9 @@ The backend is deployed on Render together with a PostgreSQL database. Render's 
 You need the .NET 10 SDK, a database instance, and a Brevo API key if you want to test email. Add your connection string, JWT settings (the key must be at least 32 characters) and Brevo settings to your configuration or user-secrets. Apply the migrations with the Entity Framework tools, then start the API project. Swagger will be available at the /swagger path, where you can try every endpoint.
 
 New accounts start with the User role. To create the first Owner, change that user's role directly in the database. From then on, the Owner can promote other users through the API.
+
+##Links
+
+GitHub Front: github.com/Unrepeatable-Groot/MyMovies-Front 
+Swagger: https://mymovies-u2vz.onrender.com/swagger 
+Site: https://mymoviesfront.netlify.app/
